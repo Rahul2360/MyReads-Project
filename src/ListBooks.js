@@ -4,35 +4,47 @@ import './App.css'
 import BookDetails from './BookDetails'
 
 class ListBooks extends React.Component {
+  // three states are defined for three shelfs.
   state ={
     currentlyReading:[],
     wantToRead:[],
     read:[]
   }
 
-   componentDidMount() {
+  // this function get our book data by API .
+  componentDidMount() {
      BooksAPI.getAll().then((books) => {
        const currentlyReading = books.filter(book => book.shelf === "currentlyReading")
        const wantToRead = books.filter(book => book.shelf === "wantToRead")
        const read = books.filter(book => book.shelf === "read")
       this.setState({currentlyReading,wantToRead,read})
-   })}
+      })
+    }
 
+   // This function helps us to updating the data in the three shelfs.
+   updatedata(book,shelf){
+     BooksAPI.update(book,shelf).then(() => this.componentDidMount());
+   }
+
+   // this functions arrange the books in their respective shelfs.
    booksdata(title,books){
      return(
        <div className="bookshelf">
-             <h2 className="bookshelf-title">{title}</h2>
-             <div className="bookshelf-books">
-               <ol className="books-grid">
-                 {books.map((book,key) =>
-                   <BookDetails book={book} key={key}/>
-                 )}
-               </ol>
-             </div>
+         <h2 className="bookshelf-title">{title}</h2>
+         <div className="bookshelf-books">
+           <ol className="books-grid">
+             {books.map((book,key) =>
+               <BookDetails book={book} key={key} updatedata={this.updatedata.bind(this)} />
+               // we are declaring react Component via using ES6 so react no longer autobinds so we bind in render by this method
+               // other way is onChange={e=>this.handlechange(e)}
+             )}
+           </ol>
+         </div>
        </div>
-);
+     );
    }
-  render() {
+   render() {
+     const { currentlyReading,wantToRead,read }  = this.state
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -40,14 +52,14 @@ class ListBooks extends React.Component {
         </div>
         <div className="list-books-content">
           <div>
-             {this.booksdata("Currently Reading",this.state.currentlyReading)}
-             {this.booksdata("Want To Read",this.state.wantToRead)}
-             {this.booksdata("Read",this.state.read)}
+             {this.booksdata("Currently Reading",currentlyReading)}
+             {this.booksdata("Want To Read",wantToRead)}
+             {this.booksdata("Read",read)}
           </div>
         </div>
       </div>
-
-    )
-  }
+      )
+    }
 }
+
 export default ListBooks

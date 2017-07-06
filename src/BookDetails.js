@@ -1,20 +1,25 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
+import PropTypes from 'prop-types'
 
 class BookDetails extends React.Component {
      state = {
          value: 'none'
-     };
+     }
+     static PropTypes = {
+      updatedata: PropTypes.func.isRequired,
+    }
+
  	render() {
- 		const { book }  = this.props
+ 		const { book,updatedata }  = this.props
  		return(
  				<li>
  	        <div className="book">
  	          <div className="book-top">
  	            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: ` url("${book.imageLinks.smallThumbnail}")` }}></div>
  	            <div className="book-shelf-changer">
- 	              <select>
+ 	              <select onChange={e => updatedata(book, e.target.value)} value={book.shelf}>
  	                <option value="none" disabled>Move to...</option>
  	                <option value="currentlyReading">Currently Reading</option>
  	                <option value="wantToRead">Want to Read</option>
@@ -23,8 +28,8 @@ class BookDetails extends React.Component {
  	              </select>
  	            </div>
  	          </div>
- 	          <div className="book-title">{this.props.title}</div>
- 	          <div className="book-authors">{this.props.authors}</div>
+ 	          <div className="book-title">{book.title}</div>
+ 	          <div className="book-authors">{book.authors}</div>
  	        </div>
  	      </li>
  			)
