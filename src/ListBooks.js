@@ -39,6 +39,7 @@ class ListBooks extends React.Component {
                // other way is onChange={e=>this.handlechange(e)}
              )}
            </ol>
+           <p className="books-length">Total books : {books.length}</p>
          </div>
        </div>
      );
