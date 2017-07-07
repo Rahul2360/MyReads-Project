@@ -7,7 +7,11 @@ body {
 body, .app {
   background: white;
 }
-
+p {
+  color: blue;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
 /* main page */
 
 .list-books-title {

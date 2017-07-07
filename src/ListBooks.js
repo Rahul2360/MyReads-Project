@@ -2,6 +2,7 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookDetails from './BookDetails'
+import SearchBooks from './SearchBooks'
 
 class ListBooks extends React.Component {
   // three states are defined for three shelfs.
@@ -45,7 +46,7 @@ class ListBooks extends React.Component {
      );
    }
    render() {
-     const { currentlyReading,wantToRead,read }  = this.state
+    const { currentlyReading,wantToRead,read }  = this.state
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -57,6 +58,12 @@ class ListBooks extends React.Component {
              {this.booksdata("Want To Read",wantToRead)}
              {this.booksdata("Read",read)}
           </div>
+        </div>
+        <div className="open-search">
+          <a
+            href="#search"
+            onClick={this.props.onNavigate}
+            className="s  earch-books">Add a book</a>
         </div>
       </div>
       )
