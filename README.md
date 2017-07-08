@@ -13,15 +13,23 @@
 
 ## Screenshot of project
    * Home page of the project
+
+
    ![homepage](image/main.png)
 
-   * change books in one shelf to another
+   * Change books in one shelf to another
+
+
    ![books](image/change.png)
 
-   * search section in the project
+   * Search section in the project
+
+
    ![Search section](image/search.png)
 
    * Added books in main page
+
+
    ![Added books](image/add.png)
 
 ## Description
