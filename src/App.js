@@ -3,24 +3,14 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import ListBooks from './ListBooks'
 import SearchBooks from './SearchBooks'
+import {Route} from 'react-router-dom'
 
 class BooksApp extends React.Component {
-  state={
-    screen:'list' // search
-  }
   render() {
     return (
       <div className="app">
-        {this.state.screen === 'list' && (
-            <ListBooks
-              onNavigate={() => {
-                this.setState({screen:"search"})
-              }}
-            />
-        )}
-      {this.state.screen === 'search' && (
-        <SearchBooks/>
-      )}
+        <Route exact path="/" component={ListBooks}/>
+        <Route path="/search" component={SearchBooks}/>
         </div>
       )
     }

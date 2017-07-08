@@ -3,6 +3,7 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookDetails from './BookDetails'
 import SearchBooks from './SearchBooks'
+import {Link} from 'react-router-dom'
 
 class ListBooks extends React.Component {
   // three states are defined for three shelfs.
@@ -11,20 +12,23 @@ class ListBooks extends React.Component {
     wantToRead:[],
     read:[]
   }
-
   // this function get our book data by API .
   componentDidMount() {
-     BooksAPI.getAll().then((books) => {
-       const currentlyReading = books.filter(book => book.shelf === "currentlyReading")
-       const wantToRead = books.filter(book => book.shelf === "wantToRead")
-       const read = books.filter(book => book.shelf === "read")
-      this.setState({currentlyReading,wantToRead,read})
-      })
-    }
+     this.getdata();
+  }
+  getdata(){
+    return(
+      BooksAPI.getAll().then((books) => {
+        const currentlyReading = books.filter(book => book.shelf === "currentlyReading")
+        const wantToRead = books.filter(book => book.shelf === "wantToRead")
+        const read = books.filter(book => book.shelf === "read")
+        this.setState({currentlyReading,wantToRead,read})
+     }))
+  }
 
    // This function helps us to updating the data in the three shelfs.
    updatedata(book,shelf){
-     BooksAPI.update(book,shelf).then(() => this.componentDidMount());
+     BooksAPI.update(book,shelf).then(() => this.getdata())
    }
 
    // this functions arrange the books in their respective shelfs.
@@ -60,10 +64,7 @@ class ListBooks extends React.Component {
           </div>
         </div>
         <div className="open-search">
-          <a
-            href="#search"
-            onClick={this.props.onNavigate}
-            className="s  earch-books">Add a book</a>
+          <Link to="/search">Add a book</Link>
         </div>
       </div>
       )

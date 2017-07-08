@@ -5,11 +5,12 @@ import PropTypes from 'prop-types'
 import SearchBooks from './SearchBooks'
 
 class BookDetails extends React.Component {
+    // Initially the value is none
      state = {
          value: 'none'
      }
      static PropTypes = {
-      updatedata: PropTypes.func.isRequired,
+      updatedata: PropTypes.func.isRequired
     }
 
  	render() {
