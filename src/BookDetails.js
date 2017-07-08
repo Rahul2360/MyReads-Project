@@ -1,8 +1,6 @@
 import React from 'react'
-import * as BooksAPI from './BooksAPI'
 import './App.css'
 import PropTypes from 'prop-types'
-import SearchBooks from './SearchBooks'
 
 class BookDetails extends React.Component {
     // Initially the value is none

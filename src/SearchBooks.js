@@ -1,9 +1,8 @@
-import React, {Component} from 'react'
+import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import {Link} from 'react-router-dom'
 import BookDetails from './BookDetails'
 import PropTypes from 'prop-types'
-import {withRouter} from 'react-router'
 
 class SearchBooks extends React.Component {
   // This is used for implementing the history property
