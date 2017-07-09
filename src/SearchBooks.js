@@ -26,13 +26,13 @@ class SearchBooks extends React.Component {
 }
   // this is used for display the page
   render() {
-    const { books } = this.state;
+    const { books,query } = this.state;
     return (
       <div className="search-books">
         <div className="search-books-bar">
           <Link to="/" className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
-            <input type="text" placeholder="Search by title or author" value={books.query} onChange={(event) => this.searchquery(event.target.value)}/>
+            <input type="text" placeholder="Search by title or author" value={query} onChange={(event) => this.searchquery(event.target.value)}/>
           </div>
         </div>
         <div className="search-books-results">

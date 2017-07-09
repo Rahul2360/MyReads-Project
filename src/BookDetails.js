@@ -8,7 +8,8 @@ class BookDetails extends React.Component {
          value: 'none'
      }
      static PropTypes = {
-      updatedata: PropTypes.func.isRequired
+      updatedata: PropTypes.func.isRequired,
+      book:PropTypes.object.isRequired
     }
 
  	render() {

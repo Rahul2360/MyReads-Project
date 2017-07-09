@@ -26,9 +26,19 @@ class ListBooks extends React.Component {
   }
 
    // This function helps us to updating the data in the three shelfs.
-   updatedata(book,shelf){
-     BooksAPI.update(book,shelf).then(() => this.getdata())
-   }
+   updatedata = (book, shelf) => {
+    if (book.shelf !== shelf) {
+      BooksAPI.update(book, shelf).then(() => {
+        book.shelf = shelf
+
+        // Filter out the book and append it to the end of the list
+        // so it appears at the end of whatever shelf it was added to.
+        this.setState(state => ({
+          books: state.books.filter(b => b.id !== book.id).concat([ book ])
+        }))
+      })
+    }
+  }
 
    // this functions arrange the books in their respective shelfs.
    booksdata(title,books){
