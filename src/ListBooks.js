@@ -3,8 +3,12 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookDetails from './BookDetails'
 import {Link} from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 class ListBooks extends React.Component {
+  static PropTypes = {
+   updatedata: PropTypes.func.isRequired,
+ }
   // three states are defined for three shelfs.
   state ={
     currentlyReading:[],
@@ -26,19 +30,6 @@ class ListBooks extends React.Component {
   }
 
    // This function helps us to updating the data in the three shelfs.
-   updatedata = (book, shelf) => {
-    if (book.shelf !== shelf) {
-      BooksAPI.update(book, shelf).then(() => {
-        book.shelf = shelf
-
-        // Filter out the book and append it to the end of the list
-        // so it appears at the end of whatever shelf it was added to.
-        this.setState(state => ({
-          books: state.books.filter(b => b.id !== book.id).concat([ book ])
-        }))
-      })
-    }
-  }
 
    // this functions arrange the books in their respective shelfs.
    booksdata(title,books){
@@ -48,7 +39,7 @@ class ListBooks extends React.Component {
          <div className="bookshelf-books">
            <ol className="books-grid">
              {books.map((book,key) =>
-               <BookDetails book={book} key={key} updatedata={this.updatedata.bind(this)} />
+               <BookDetails book={book} key={key} updatedata={this.updatedata} />
                // we are declaring react Component via using ES6 so react no longer autobinds so we bind in render by this method
                // other way is onChange={e=>this.handlechange(e)}
              )}
