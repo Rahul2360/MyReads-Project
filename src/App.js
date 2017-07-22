@@ -68,6 +68,9 @@ class BooksApp extends React.Component {
       })
     };
 
+    clear =() => {
+      this.setState({searchedBooks:[]});
+    }
     render() {
         return (
             <div className="app">
@@ -76,6 +79,7 @@ class BooksApp extends React.Component {
                     <ListBooks
                         books={this.state.books}
                         handleShelfChange={this.updatedata}
+                        clear={this.clear}
                     />
 
                 )}/>

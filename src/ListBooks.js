@@ -33,7 +33,7 @@ class ListBooks extends React.Component {
                     />
                 </div>
                 <div className="open-search">
-                  <Link to="/search">Add a book</Link>
+                  <Link to="/search" onClick={this.props.clear}>Add a book</Link>
                 </div>
             </div>
         )
