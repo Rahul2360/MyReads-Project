@@ -9,7 +9,8 @@ class BooksApp extends React.Component {
     // three states are defined for three shelfs.
     state ={
         books:[],
-        searchedBooks:[]
+        searchedBooks:[],
+        results:[]
     }
     // this function get our book data by API .
     componentDidMount() {
@@ -22,7 +23,7 @@ class BooksApp extends React.Component {
             }))
     }
     // This function helps us to updating the data in the three shelfs.
-    /*updatedata(book, shelf){
+/*    updatedata(book, shelf){
         if (book.shelf !== shelf) {
             BooksAPI.update(book, shelf).then(() => {
                 book.shelf = shelf
@@ -40,11 +41,30 @@ class BooksApp extends React.Component {
       })
     }
 
+    updateSearchedBooks = (searchedBooks,books) => {
+    const results =searchedBooks.map((result) => {
+      for(let book of books){
+        if(result.id === book.id){
+          result.shelf = book.shelf
+          return book
+        } else {
+          result.shelf = 'none'
+        }
+      }
+      return true
+    })
+    this.setState({results,searchedBooks})
+  }
+
     // this helps us to search in the search box
     searchquery = (event) => {
       let query= event.target.value;
       BooksAPI.search(query).then((searchedBooks) => {
+        if(searchedBooks.length >= 1){
+          this.updateSearchedBooks(searchedBooks,this.state.books)
+        } else {
         this.setState({searchedBooks});
+      }
       })
     };
 
